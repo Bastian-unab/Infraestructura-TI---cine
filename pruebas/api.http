@@ -1,0 +1,142 @@
+
+GET http://localhost:5000/api/peliculas
+
+###
+
+GET http://localhost:5000/api/peliculas/1
+
+###
+
+POST http://localhost:5000/api/peliculas
+Content-Type: application/json
+
+{
+    "titulo": "El origen",
+    "duracion": 148,
+    "clasificacion": "TE+7"
+}
+
+###
+
+PATCH http://localhost:5000/api/peliculas/1
+Content-Type: application/json
+
+{
+    "duracion": 169
+}
+
+###
+
+GET http://localhost:5000/api/resenas
+
+###
+
+POST http://localhost:5000/api/resenas
+Content-Type: application/json
+
+{
+    "pelicula_id": 1,
+    "calificacion": 5,
+    "comentario": "Excelente pelicula",
+    "aspectos": ["Historia", "Musica", "Actuaciones"]
+}
+
+###
+
+GET http://localhost:5000/api/peliculas/1/resenas
+
+###
+
+GET http://localhost:5000/api/peliculas/99999
+
+###
+
+POST http://localhost:5000/api/peliculas
+Content-Type: application/json
+
+{
+    "titulo": "Pelicula incorrecta",
+    "duracion": -50,
+    "clasificacion": "TE"
+}
+
+###
+
+GET http://localhost:5000/api/no-existe
+
+###
+
+POST http://localhost:5000/api/peliculas
+Content-Type: application/json
+
+{
+    "duracion": 120,
+    "clasificacion": "TE"
+}
+
+###
+
+POST http://localhost:5000/api/peliculas
+Content-Type: application/json
+
+{
+    "titulo": "Prueba",
+    "duracion": 120,
+    "clasificacion": "CLASIFICACION_DEMASIADO_LARGA"
+}
+
+###
+
+PATCH http://localhost:5000/api/peliculas/1
+Content-Type: application/json
+
+{
+    "duracion": -100
+}
+
+###
+
+PATCH http://localhost:5000/api/peliculas/99999
+Content-Type: application/json
+
+{
+    "duracion": 120
+}
+
+###
+
+POST http://localhost:5000/api/resenas
+Content-Type: application/json
+
+{
+    "pelicula_id": 1,
+    "calificacion": 4
+}
+
+###
+
+POST http://localhost:5000/api/resenas
+Content-Type: application/json
+
+{
+    "pelicula_id": 1,
+    "calificacion": 10
+}
+
+###
+
+POST http://localhost:5000/api/resenas
+Content-Type: application/json
+
+{
+    "pelicula_id": 99999,
+    "calificacion": 5
+}
+
+###
+
+GET http://localhost:5000/api/peliculas/99999/resenas
+
+###
+
+DELETE http://localhost:5000/api/resenas

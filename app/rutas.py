@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from app import datos
 from app.datos import conectar, conectar_mongo
 
 rutas = Blueprint("rutas", __name__)
@@ -150,8 +151,13 @@ def listar_resenas():
     cliente, db = conectar_mongo()
 
     try:
-        datos = db.resenas.find({}, {"_id": 0})
-        resenas = list(datos)
+        datos = db.resenas.find()
+        resenas = []
+
+        for resena in datos:
+            resena["id"] = str(resena.pop("_id"))
+            resenas.append(resena)
+
 
         return jsonify(resenas), 200
     finally:
@@ -248,11 +254,13 @@ def obtener_resenas_pelicula(id):
     cliente, mongo = conectar_mongo()
 
     try:
-        datos = mongo.resenas.find(
-            {"pelicula_id": id},
-            {"_id": 0}
-        )
-        resenas = list(datos)
+        datos = mongo.resenas.find({"pelicula_id": id})
+        resenas = []
+
+        for resena in datos:
+            resena["id"] = str(resena.pop("_id"))
+            resenas.append(resena)
+
     finally:
         cliente.close()
 

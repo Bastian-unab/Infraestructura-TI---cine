@@ -10,7 +10,7 @@ services:
       mysql:
         condition: service_healthy
       mongo:
-        condition: service_started
+        condition: service_healthy
 
   mysql:
     image: mysql:8.0
@@ -31,6 +31,7 @@ services:
       retries: 10
       start_period: 30s
 
+  
   mongo:
     image: mongo:7
     environment:
@@ -38,6 +39,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ping: 1})'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
 
 volumes:
   mysql_data:
